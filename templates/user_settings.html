@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>User Settings</h1>
+
+    <h2>Change Password</h2>
+    <form method="POST" action="{{ url_for('user_settings') }}">
+        {{ change_password_form.hidden_tag() }}
+        {{ change_password_form.password.label }}: {{ change_password_form.password() }}<br>
+        {{ change_password_form.confirm_password.label }}: {{ change_password_form.confirm_password() }}<br>
+        {{ change_password_form.submit() }}
+    </form>
+
+    <h2>User Settings</h2>
+    <form method="POST" action="{{ url_for('user_settings') }}">
+        {{ user_settings_form.hidden_tag() }}
+        {{ user_settings_form.username.label }}: {{ user_settings_form.username() }}<br>
+        {{ user_settings_form.email.label }}: {{ user_settings_form.email() }}<br>
+        {{ user_settings_form.submit() }}
+    </form>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<header>
+  <nav>
+    <!-- Navigation links -->
+    <ul>
+      <li><a href="{{ url_for('register') }}">Register</a></li>
+      <li><a href="{{ url_for('login') }}">Login</a></li>
+      <li><a href="{{ url_for('public_events') }}">See Public Events</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Welcome to Event Planner</h1>
+    <p>Plan and organize your events with ease</p>
+  </div>
+</section>
+
+<section class="features">
+  <div class="container">
+    <div class="feature">
+      <h2>Easy Event Planning</h2>
+      <p>Plan your events, invite guests, and manage schedules with our user-friendly interface.</p>
+    </div>
+    <div class="feature">
+      <h2>Flexible Customization</h2>
+      <p>Customize your event details, preferences, and themes to make your events unique.</p>
+    </div>
+    <div class="feature">
+      <h2>Collaborative Planning</h2>
+      <p>Collaborate with your team, share information, and streamline your event planning process.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2>Ready to Get Started?</h2>
+    <a href="{{ url_for('register') }}" class="btn-primary">Sign Up Now</a>
+    <h2>Already a member?</h2>
+    <a href="{{ url_for('login') }}" class="btn-secondary">Log In</a>
+  </div>
+</section>
+{% endblock %}

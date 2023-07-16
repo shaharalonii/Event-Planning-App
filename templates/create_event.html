@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Add your create event form here -->
+    <h1>Create Event</h1>
+
+    <form method="POST" action="{{ url_for('create_event') }}">
+        {{ form.csrf_token }}  <!-- Include the CSRF token -->
+
+        <label>Title:</label>
+        <input type="text" name="title" required>
+
+        <label>Description:</label>
+        <textarea name="description"></textarea>
+
+        <label>Date:</label>
+        <input type="date" name="date" required>
+
+        <button type="submit">Create Event</button>
+    </form>
+{% endblock %}

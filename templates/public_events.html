@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Public Events{% endblock %}
+
+{% block content %}
+    <header>
+        <nav>
+        <!-- Navigation links -->
+        <ul>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+        </ul>
+        </nav>
+    </header>
+
+    <section class="events">
+        <div class="container">
+        <h2>Public Events</h2>
+        {% if events %}
+            <ul>
+            {% for event in events %}
+                <li>
+                <h3>{{ event.title }}</h3>
+                <p>{{ event.description }}</p>
+                <p>Date: {{ event.date }}</p>
+                <p>Created by: {{ event.user.name }}</p>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No public events found.</p>
+        {% endif %}
+        </div>
+    </section>
+{% endblock %}

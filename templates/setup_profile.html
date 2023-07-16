@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Setup Profile{% endblock %}
+
+{% block content %}
+<h1>Setup Profile</h1>
+<form method="POST" action="{{ url_for('setup_profile') }}">
+    <!-- Setup profile form fields -->
+    <div>
+        <label for="contact">Contact:</label>
+        <input type="text" id="contact" name="contact" required>
+    </div>
+    <div>
+        <label for="event_preferences">Event Preferences:</label>
+        <input type="text" id="event_preferences" name="event_preferences" required>
+    </div>
+    <div>
+        <label for="profile_picture">Profile Picture:</label>
+        <input type="file" id="profile_picture" name="profile_picture">
+    </div>
+    <input type="submit" value="Save">
+</form>
+{% endblock %}

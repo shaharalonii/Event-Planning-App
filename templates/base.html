@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+
+    <main>
+        <div class="container">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer>
+        <!-- Footer content -->
+        <p>© 2023 Your App. All rights reserved.</p>
+    </footer>
+</body>
+</html>

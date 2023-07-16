@@ -1,0 +1,147 @@
+body {
+  background: linear-gradient(to bottom, #55c1ff, #667eea);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: #333;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #667eea;
+}
+
+form {
+  margin-top: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+input[type="submit"],
+button {
+  background-color: #667eea;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover,
+button:hover {
+  background-color: #5c50ef;
+}
+
+.flash-messages {
+  margin-top: 20px;
+}
+
+.flash-message {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  animation: fadeIn 0.5s ease-in-out;
+  color: #667eea;
+}
+
+nav {
+  background-color: #667eea;
+  padding: 10px 20px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+nav ul li {
+  margin-right: 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+nav ul li a:hover {
+  background-color: #5c50ef;
+}
+
+footer {
+  background-color: #667eea;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 20px;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Adjustments for event details */
+.event-details {
+  margin: 10px;
+}
+
+.event-details h5 {
+  font-size: 20px;
+  margin: 1px;
+}
+
+.event-details p {
+  font-size: 16px;
+  margin: 1px; 
+}
+
+.event-buttons {
+  margin: 10px;
+}
+
+.event-buttons button {
+  margin: 1px;
+}
+
+.btn-create-event {
+  display: inline-block;
+  background-color: #667eea;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-create-event:hover {
+  background-color: #5c50ef;
+}
