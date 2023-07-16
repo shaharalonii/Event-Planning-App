@@ -31,7 +31,7 @@
                         </div>
                         {% if event.user_id == current_user.id %}
                             <div class="event-buttons">
-                                <button href="{{ url_for('edit_event', event_id=event.id) }}" class="btn btn-danger btn-sm">Edit</button>
+                                <a href="{{ url_for('edit_event', event_id=event.id) }}" class="btn btn-danger btn-sm">Edit</a>
                                 <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ event.id }}')">Delete</button>
                             </div>
                         {% endif %}
@@ -55,7 +55,7 @@
                         </div>
                         {% if event.user_id == current_user.id %}
                             <div class="event-buttons">
-                                <button href="{{ url_for('edit_event', event_id=event.id) }}" class="btn btn-danger btn-sm">Edit</button>
+                                <a href="{{ url_for('edit_event', event_id=event.id) }}" class="btn btn-danger btn-sm">Edit</a>
                                 <button class="btn btn-danger btn-sm" onclick="confirmDelete('{{ event.id }}')">Delete</button>
                             </div>
                         {% endif %}

@@ -246,9 +246,9 @@ def edit_event(event_id):
     event = Event.query.get_or_404(event_id)
     if event.user_id != current_user.id:
         flash('You are not authorized to edit this event', 'danger')
-        return redirect(url_for('home'))
+        return redirect(url_for('dashboard'))
 
-    form = EventForm()
+    form = EventForm(obj=event)
 
     if form.validate_on_submit():
         event.title = form.title.data
@@ -256,13 +256,10 @@ def edit_event(event_id):
         event.date = form.date.data
         db.session.commit()
         flash('Event updated successfully', 'success')
-        return redirect(url_for('home'))
-
-    form.title.data = event.title
-    form.description.data = event.description
-    form.date.data = event.date
+        return redirect(url_for('dashboard'))
 
     return render_template('edit_event.html', form=form, event=event)
+
 
 @app.route('/update_event/<int:event_id>', methods=['POST'])
 @login_required
