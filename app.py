@@ -18,6 +18,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+bcrypt = Bcrypt(app)
+
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+
 class ResetPasswordForm(FlaskForm):
     password = PasswordField('New Password', validators=[
         DataRequired(),
@@ -30,6 +39,17 @@ class ResetPasswordForm(FlaskForm):
         EqualTo('password', message='Passwords must match.')
     ])
     submit = SubmitField('Reset Password')
+
+class ChangePasswordForm(FlaskForm):
+    current_password = PasswordField('Current Password', validators=[DataRequired()])
+    new_password = PasswordField('New Password', validators=[
+        DataRequired(),
+        Length(min=8, max=16),
+        Regexp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,16}$',
+               message='Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number.')
+    ])
+    confirm_new_password = PasswordField('Confirm New Password', validators=[DataRequired(), EqualTo('new_password', message='Passwords must match.')])
+    submit = SubmitField('Change Password')
 
 class RegisterForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
@@ -47,13 +67,11 @@ class RegisterForm(FlaskForm):
     privacy_preference = StringField('Privacy Preference')
     submit = SubmitField('Register')
 
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+class SettingsForm(FlaskForm):
+    privacy_preference = StringField('Privacy Preference')
+    contact = StringField('Contact')
+    submit = SubmitField('Save Changes')
 
-bcrypt = Bcrypt(app)
-
-login_manager = LoginManager(app)
-login_manager.login_view = 'login'
 
 class EventForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
@@ -90,6 +108,46 @@ class Event(db.Model):
 
 with app.app_context():
     db.create_all()
+
+@app.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        current_password = form.current_password.data
+        new_password = form.new_password.data
+
+        if bcrypt.check_password_hash(current_user.password, current_password):
+            hashed_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+            current_user.password = hashed_password
+            db.session.commit()
+            flash('Password changed successfully', 'success')
+            return redirect(url_for('settings'))
+        else:
+            flash('Current password is incorrect', 'danger')
+
+    return render_template('change_password.html', form=form)
+
+@app.route('/settings', methods=['GET', 'POST'])
+@login_required
+def settings():
+    form = SettingsForm()  # Create a form for user settings
+    
+    if form.validate_on_submit():
+        # Update the user's settings based on the form data
+        current_user.privacy_preference = form.privacy_preference.data
+        current_user.contact = form.contact.data
+        # ... update other user settings ...
+        db.session.commit()
+        flash('Settings updated successfully', 'success')
+        return redirect(url_for('settings'))
+    
+    # Pre-populate the form with the user's current settings
+    form.privacy_preference.data = current_user.privacy_preference
+    form.contact.data = current_user.contact
+    # ... populate other form fields with user settings ...
+    
+    return render_template('settings.html', form=form)
 
 @app.route('/events/<int:event_id>', methods=['DELETE'])
 @login_required
@@ -143,6 +201,18 @@ def register():
         flash('Registration successful.', 'success')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
+
+@app.route('/delete_user', methods=['POST'])
+@login_required
+def delete_user():
+    user = current_user
+    # Perform the deletion logic here, such as deleting user-related data from the database
+    db.session.delete(user)
+    db.session.commit()
+    logout_user()
+    flash('Your account has been deleted.', 'success')
+    return redirect(url_for('home'))
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

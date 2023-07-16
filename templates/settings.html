@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header>
+  <nav>
+    <!-- Navigation links -->
+    <ul>
+      <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+<h1>User Settings</h1>
+<form method="POST" action="{{ url_for('settings') }}">
+  {{ form.csrf_token }}
+  <div class="form-group">
+    {{ form.privacy_preference.label }}
+    <select class="form-control" name="{{ form.privacy_preference.name }}">
+      <option value="private" {% if form.privacy_preference.data == 'private' %}selected{% endif %}>Private</option>
+      <option value="public" {% if form.privacy_preference.data == 'public' %}selected{% endif %}>Public</option>
+    </select>
+  </div>
+  <a href="{{ url_for('change_password') }}" class="btn btn-primary">Change Password</a><br><br><br>
+  <button type="submit" class="btn btn-primary" name="submit" value="save_changes">Save Changes</button>
+</form>
+
+<form method="POST" action="{{ url_for('delete_user') }}" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+  {{ form.csrf_token }}
+  <button type="submit" class="btn btn-danger" name="submit" value="delete_user">Delete User</button>
+</form>
+{% endblock %}
