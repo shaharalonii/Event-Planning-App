@@ -1,3 +1,36 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 body {
   background: linear-gradient(to bottom, #55c1ff, #667eea);
   background-attachment: fixed;
@@ -17,16 +50,19 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   color: #333;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 h1 {
   font-size: 28px;
   margin-bottom: 20px;
   color: #667eea;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 form {
   margin-top: 20px;
+  animation: slideInRight 0.5s ease-in-out;
 }
 
 input[type="text"],
@@ -49,6 +85,7 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  animation: slideInRight 0.5s ease-in-out;
 }
 
 input[type="submit"]:hover,
@@ -58,19 +95,21 @@ button:hover {
 
 .flash-messages {
   margin-top: 20px;
+  animation: slideInLeft 0.5s ease-in-out;
 }
 
 .flash-message {
   background-color: #fff;
   padding: 10px;
   border-radius: 5px;
-  animation: fadeIn 0.5s ease-in-out;
+  animation: slideInLeft 0.5s ease-in-out;
   color: #667eea;
 }
 
 nav {
   background-color: #667eea;
   padding: 10px 20px;
+  animation: slideInRight 0.5s ease-in-out;
 }
 
 nav ul {
@@ -79,10 +118,12 @@ nav ul {
   padding: 0;
   display: flex;
   justify-content: flex-end;
+  animation: slideInRight 0.5s ease-in-out;
 }
 
 nav ul li {
   margin-right: 10px;
+  animation: slideInRight 0.5s ease-in-out;
 }
 
 nav ul li a {
@@ -90,6 +131,7 @@ nav ul li a {
   text-decoration: none;
   padding: 5px 10px;
   border-radius: 5px;
+  animation: slideInRight 0.5s ease-in-out;
 }
 
 nav ul li a:hover {
@@ -102,6 +144,7 @@ footer {
   text-align: center;
   padding: 10px 0;
   margin-top: 20px;
+  animation: slideInLeft 0.5s ease-in-out;
 }
 
 footer p {
@@ -111,24 +154,29 @@ footer p {
 /* Adjustments for event details */
 .event-details {
   margin: 10px;
+  animation: slideInRight 0.5s ease-in-out;
 }
 
 .event-details h5 {
   font-size: 20px;
   margin: 1px;
+  animation: slideInRight 0.5s ease-in-out;
 }
 
 .event-details p {
   font-size: 16px;
-  margin: 1px; 
+  margin: 1px;
+  animation: slideInRight 0.5s ease-in-out;
 }
 
 .event-buttons {
   margin: 10px;
+  animation: slideInRight 0.5s ease-in-out;
 }
 
 .event-buttons button {
   margin: 1px;
+  animation: slideInRight 0.5s ease-in-out;
 }
 
 .btn-create-event {
@@ -140,8 +188,54 @@ footer p {
   border-radius: 5px;
   text-decoration: none;
   cursor: pointer;
+  animation: slideInRight 0.5s ease-in-out;
 }
 
 .btn-create-event:hover {
   background-color: #5c50ef;
+  animation: slideInRight 0.5s ease-in-out;
+}
+
+/* Small screen styles */
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 90%;
+  }
+  
+  h1 {
+    font-size: 24px;
+  }
+  
+  input[type="submit"],
+  button {
+    padding: 8px 16px;
+  }
+  
+  .flash-message {
+    font-size: 14px;
+  }
+  
+  nav ul li a {
+    padding: 3px 6px;
+  }
+  
+  footer p {
+    font-size: 12px;
+  }
+  
+  .event-details h5 {
+    font-size: 18px;
+  }
+  
+  .event-details p {
+    font-size: 14px;
+  }
+  
+  .event-buttons button {
+    margin: 0;
+  }
+  
+  .btn-create-event {
+    padding: 8px 16px;
+  }
 }
