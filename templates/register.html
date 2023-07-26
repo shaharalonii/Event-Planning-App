@@ -33,6 +33,7 @@
         I agree to the <a href="{{ url_for('terms_of_service') }}" target="_blank">Terms of Service</a> and <a href="{{ url_for('privacy_policy') }}" target="_blank">Privacy Policy</a>.
       </label>
     </div>
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit" class="btn btn-primary">Register</button><br>
+    <p>Alrady have a account? <a href="{{ url_for('login') }}">login</a></p>
   </form>
 {% endblock %}

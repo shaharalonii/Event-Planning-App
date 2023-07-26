@@ -4,6 +4,14 @@
 {% block title %}Terms of Service{% endblock %}
 
 {% block content %}
+    <header>
+        <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+        </ul>
+        </nav>
+    </header>
     <h2>Terms of Service</h2>
     <div class="tos-content">
         {% include 'tos.txt' %}

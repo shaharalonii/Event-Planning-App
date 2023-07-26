@@ -4,6 +4,14 @@
 {% block title %}Privacy Policy{% endblock %}
 
 {% block content %}
+    <header>
+        <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+        </ul>
+        </nav>
+    </header>
     <h2>Privacy Policy</h2>
     <div class="privacy-content">
         {% include 'privacy_policy.txt' %}
