@@ -7,8 +7,13 @@
         <nav>
         <!-- Navigation links -->
         <ul>
+            {% if not current_user.is_authenticated %}
             <li><a href="{{ url_for('register') }}">Register</a></li>
             <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('Dashboard') }}">Dashboard</a></li>
+            {% endif %}
             <li><a href="{{ url_for('home') }}">Home</a></li>
         </ul>
         </nav>

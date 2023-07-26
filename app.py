@@ -346,5 +346,14 @@ def reset_password_action(reset_token):
 def password_reset_success():
     return render_template('password_reset_success.html')
 
+@app.route('/terms_of_service')
+def terms_of_service():
+    return render_template('terms_of_service.html')
+
+@app.route('/privacy_policy')
+def privacy_policy():
+    return render_template('privacy_policy.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)

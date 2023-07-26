@@ -27,6 +27,12 @@
         <option value="public">Public</option>
       </select>
     </div>
+    <div class="form-group">
+      <label for="tos-checkbox">
+        <input type="checkbox" id="tos-checkbox" required>
+        I agree to the <a href="{{ url_for('terms_of_service') }}" target="_blank">Terms of Service</a> and <a href="{{ url_for('privacy_policy') }}" target="_blank">Privacy Policy</a>.
+      </label>
+    </div>
     <button type="submit" class="btn btn-primary">Register</button>
   </form>
 {% endblock %}

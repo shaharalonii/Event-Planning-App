@@ -31,6 +31,15 @@
   }
 }
 
+.tos-content {
+  font-size: 12px;
+}
+
+/* For the content in privacy_policy.txt */
+.privacy-content {
+  font-size: 12px;
+}
+
 body {
   background: linear-gradient(to bottom, #55c1ff, #667eea);
   background-attachment: fixed;
@@ -51,7 +60,9 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   color: #333;
   animation: fadeIn 0.5s ease-in-out;
+  overflow: hidden; /* Add this line to contain the content */
 }
+
 
 h1 {
   font-size: 28px;
