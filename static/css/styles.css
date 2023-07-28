@@ -35,7 +35,6 @@
   font-size: 12px;
 }
 
-/* For the content in privacy_policy.txt */
 .privacy-content {
   font-size: 12px;
 }
@@ -60,9 +59,8 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   color: #333;
   animation: fadeIn 0.5s ease-in-out;
-  overflow: hidden; /* Add this line to contain the content */
+  overflow: hidden;
 }
-
 
 h1 {
   font-size: 28px;
@@ -162,7 +160,6 @@ footer p {
   margin: 0;
 }
 
-/* Adjustments for event details */
 .event-details {
   margin: 10px;
   animation: slideInRight 0.5s ease-in-out;
@@ -190,7 +187,8 @@ footer p {
   animation: slideInRight 0.5s ease-in-out;
 }
 
-.btn-create-event {
+.btn-create-event,
+a.btn-create-event {
   display: inline-block;
   background-color: #667eea;
   color: #fff;
@@ -202,7 +200,8 @@ footer p {
   animation: slideInRight 0.5s ease-in-out;
 }
 
-.btn-create-event:hover {
+.btn-create-event:hover,
+a.btn-create-event:hover {
   background-color: #5c50ef;
   animation: slideInRight 0.5s ease-in-out;
 }
@@ -212,41 +211,42 @@ footer p {
   .container {
     max-width: 90%;
   }
-  
+
   h1 {
     font-size: 24px;
   }
-  
+
   input[type="submit"],
   button {
     padding: 8px 16px;
   }
-  
+
   .flash-message {
     font-size: 14px;
   }
-  
+
   nav ul li a {
     padding: 3px 6px;
   }
-  
+
   footer p {
     font-size: 12px;
   }
-  
+
   .event-details h5 {
     font-size: 18px;
   }
-  
+
   .event-details p {
     font-size: 14px;
   }
-  
+
   .event-buttons button {
     margin: 0;
   }
-  
-  .btn-create-event {
+
+  .btn-create-event,
+  a.btn-create-event {
     padding: 8px 16px;
   }
 }
