@@ -6,9 +6,10 @@ from flask_migrate import Migrate
 import secrets
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, DateField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, EqualTo, Length, Regexp
+from wtforms.validators import DataRequired, EqualTo, Length, Regexp, ValidationError
 from datetime import date
 import random
+import re
 
 app = Flask(__name__, static_folder='static')
 
@@ -17,7 +18,6 @@ app.secret_key = secrets.token_hex(16)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -57,21 +57,21 @@ class RegisterForm(FlaskForm):
     password = PasswordField('Password', validators=[
         DataRequired(),
         Length(min=8, max=16),
-        Regexp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,16}$',
-               message='Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number.')
+        EqualTo('confirm_password', message='Passwords must match.')
     ])
-    confirm_password = PasswordField('Confirm Password', validators=[
-        DataRequired(),
-        EqualTo('password', message='Passwords must match.')
-    ])
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired()])
     privacy_preference = StringField('Privacy Preference')
     submit = SubmitField('Register')
+
+    def validate_password(self, field):
+        password = field.data
+        if not re.match(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,16}$', password):
+            raise ValidationError('Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number.')
 
 class SettingsForm(FlaskForm):
     privacy_preference = StringField('Privacy Preference')
     contact = StringField('Contact')
     submit = SubmitField('Save Changes')
-
 
 class EventForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
@@ -183,24 +183,40 @@ def public_events():
     events = public_upcoming_events[:10]
     return render_template('public_events.html', events=events)
 
+def is_strong_password(password):
+    # Implement your password strength check logic here
+    # For example, using regular expressions
+    return bool(re.match(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,16}$', password))
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
+    error_message = None
+
     if form.validate_on_submit():
         name = form.name.data
         email = form.email.data
-        password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        password = form.password.data
         privacy_preference = form.privacy_preference.data
         existing_user = User.query.filter_by(email=email).first()
+
         if existing_user:
             flash('Email already exists. Please choose a different email.', 'danger')
             return redirect(url_for('register'))
-        user = User(name=name, email=email, password=password, privacy_preference=privacy_preference)
-        db.session.add(user)
-        db.session.commit()
-        flash('Registration successful.', 'success')
-        return redirect(url_for('login'))
-    return render_template('register.html', form=form)
+
+        if not is_strong_password(password):
+            error_message = 'Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number.'
+        else:
+            hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+            user = User(name=name, email=email, password=hashed_password, privacy_preference=privacy_preference)
+            db.session.add(user)
+            db.session.commit()
+            flash('Registration successful.', 'success')
+            return redirect(url_for('login'))
+
+    return render_template('register.html', form=form, error_message=error_message)
+
 
 @app.route('/delete_user', methods=['POST'])
 @login_required
@@ -212,7 +228,6 @@ def delete_user():
     logout_user()
     flash('Your account has been deleted.', 'success')
     return redirect(url_for('home'))
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -293,7 +308,6 @@ def create_event():
         return redirect(url_for('dashboard'))
     return render_template('create_event.html', form=form)
 
-
 @app.route('/dashboard')
 @login_required
 def dashboard():
@@ -350,10 +364,10 @@ def password_reset_success():
 def terms_of_service():
     return render_template('terms_of_service.html')
 
+
 @app.route('/privacy_policy')
 def privacy_policy():
     return render_template('privacy_policy.html')
-
 
 if __name__ == '__main__':
     app.run(debug=True)

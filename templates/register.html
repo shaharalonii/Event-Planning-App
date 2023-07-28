@@ -2,6 +2,9 @@
 
 {% block content %}
   <h1>Registration</h1>
+  {% if form.errors.password %}
+    <div class="alert alert-danger">{{ form.errors.password[0] }}</div>
+  {% endif %}
   <form method="POST" action="{{ url_for('register') }}">
     {{ form.csrf_token }}
     <div class="form-group">
@@ -34,6 +37,6 @@
       </label>
     </div>
     <button type="submit" class="btn btn-primary">Register</button><br>
-    <p>Alrady have a account? <a href="{{ url_for('login') }}">login</a></p>
+    <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
   </form>
 {% endblock %}
