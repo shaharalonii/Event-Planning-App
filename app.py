@@ -10,6 +10,7 @@ from wtforms.validators import DataRequired, EqualTo, Length, Regexp, Validation
 from datetime import date
 import random
 import re
+import webview
 
 app = Flask(__name__, static_folder='static')
 
@@ -26,6 +27,8 @@ bcrypt = Bcrypt(app)
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
+
+window = webview.create_window('EventBud',app)
 
 class ResetPasswordForm(FlaskForm):
     password = PasswordField('New Password', validators=[
@@ -370,4 +373,4 @@ def privacy_policy():
     return render_template('privacy_policy.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    webview.start()
