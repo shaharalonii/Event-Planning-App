@@ -373,4 +373,4 @@ def privacy_policy():
     return render_template('privacy_policy.html')
 
 if __name__ == '__main__':
-    webview.start()
+    app.run(debug=False,port='0,0,0')
