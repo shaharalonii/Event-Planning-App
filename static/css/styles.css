@@ -210,7 +210,7 @@ a.btn-create-event:hover {
 @media screen and (max-width: 768px) {
   .container {
     max-width: 90%;
-    min-height: 100vh; /* Set minimum height to occupy the full viewport height */
+    min-height: 90%; /* Set minimum height to occupy the full viewport height */
     padding: 20px 10px; /* Decrease the horizontal padding for smaller screens */
   }
 
