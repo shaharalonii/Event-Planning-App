@@ -4,7 +4,7 @@ flask_sqlalchemy
 flask_bcrypt
 flask_login
 flask_migrate
-secrets
+pyOpenSSL
 flask_wtf 
 wtforms 
 wtforms.validators 
