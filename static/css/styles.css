@@ -207,7 +207,7 @@ a.btn-create-event:hover {
 }
 
 /* Small screen styles */
-@media screen and (max-width: 768px) {
+@media screen and (max-width:480px) {
   .container {
     max-width: 90%;
     height: 90%; /* Set the height to occupy 90% of the viewport height */
