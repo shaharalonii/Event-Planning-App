@@ -210,7 +210,7 @@ a.btn-create-event:hover {
 @media screen and (max-width:480px) {
   .container {
     max-width: 90%;
-    height: 50%; /* Set the height to occupy 90% of the viewport height */
+    height: 90vh; /* Set the height to occupy 90% of the viewport height */
     padding: 20px 10px; /* Decrease the horizontal padding for smaller screens */
     overflow-y: scroll; /* Add vertical scrolling for content that exceeds the height */
   }
