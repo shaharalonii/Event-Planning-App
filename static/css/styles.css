@@ -210,13 +210,13 @@ a.btn-create-event:hover {
 @media screen and (max-width:480px) {
   .container {
     max-width: 90%;
-    height: 90%; /* Set the height to occupy 90% of the viewport height */
+    height: 70%; /* Set the height to occupy 90% of the viewport height */
     padding: 20px 10px; /* Decrease the horizontal padding for smaller screens */
     overflow-y: scroll; /* Add vertical scrolling for content that exceeds the height */
   }
 
   h1 {
-    font-size: 44px;
+    font-size: 24px;
   }
   form {
     height: 70vh; /* Set the height of the form to occupy 70% of the container's height */
