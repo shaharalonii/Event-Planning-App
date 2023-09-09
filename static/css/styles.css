@@ -207,46 +207,47 @@ a.btn-create-event:hover {
 }
 
 /* Small screen styles */
-/* Existing styles */
-
-/* Small screen styles */
 @media screen and (min-width: 768px) {
   .container {
     max-width: 90%;
-    height: 100vh; /* Set the height to occupy 100% of the viewport height */
-    padding: 40px 20px; /* Increase the padding for better spacing */
-    overflow-y: auto; /* Add vertical scrolling for content that exceeds the height */
+    height: 90%; /* Set the height to occupy 90% of the viewport height */
+    padding: 20px 10px; /* Decrease the horizontal padding for smaller screens */
+    overflow-y: scroll; /* Add vertical scrolling for content that exceeds the height */
   }
 
   h1 {
     font-size: 24px;
   }
-
-  /* Other existing styles for small screens */
-
-  /* Additional styles for taller forms on small screens */
   form {
-    height: 70%; /* Set the height of the form to occupy 70% of the container's height */
+    height: 70vh; /* Set the height of the form to occupy 70% of the container's height */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
   }
 
   .form-group {
-    margin-bottom: 20px; /* Increase the margin between form groups */
+    margin-bottom: 10px;
+  }
+
+  .form-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .form-group label {
+    margin-bottom: 5px;
   }
 
   button[type="submit"] {
-    margin-top: 30px; /* Increase the margin at the bottom of the form */
+    margin-top: 20px;
   }
 
   .flash-messages {
-    height: 30%; /* Set the height of the flash messages container */
+    height: 40vh; /* Set the height of the flash messages container */
     overflow-y: auto; /* Add vertical scrolling for flash messages */
   }
 
   .event-details {
-    height: 40%; /* Set the height of the event details container */
+    height: 40vh; /* Set the height of the event details container */
     overflow-y: auto; /* Add vertical scrolling for event details */
   }
 }

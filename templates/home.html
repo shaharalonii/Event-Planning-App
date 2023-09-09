@@ -14,14 +14,11 @@
   </nav>
 </header>
 
-<section class="hero">
+<div class="hero">
   <div class="hero-content">
     <h1>Welcome to Event Planner</h1>
     <p>Plan and organize your events with ease</p>
   </div>
-</section>
-
-<section class="features">
   <div class="container">
     <div class="feature">
       <h2>Easy Event Planning</h2>
@@ -36,14 +33,11 @@
       <p>Collaborate with your team, share information, and streamline your event planning process.</p>
     </div>
   </div>
-</section>
-
-<section class="cta">
   <div class="container">
     <h2>Ready to Get Started?</h2>
     <a href="{{ url_for('register') }}" class="btn-create-event">Sign Up Now</a>
     <h2>Already a member?</h2>
     <a href="{{ url_for('login') }}" class="btn-create-event">Log In</a>
   </div>
-</section>
+</div>
 {% endblock %}
